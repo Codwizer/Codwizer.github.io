@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="None">
+    
+    <link rel="canonical" href="https://github.com/codwizer/mhjson/">
+    <link rel="shortcut icon" href="./img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>MHjson</title>
+    <link href="./css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="./css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="./css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="./js/jquery-3.2.1.min.js"></script>
+    <script src="./js/bootstrap-3.3.7.min.js"></script>
+    <script src="./js/highlight.pack.js"></script>
+    
+      <script src="./js/elasticlunr.min.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '.';
+      var is_top_frame = (window === window.parent);
+        
+        var pageToc = [
+          {title: "mhjson", url: "#_top", children: [
+              {title: "Installation", url: "#installation" },
+              {title: "Usage", url: "#usage" },
+              {title: "API", url: "#api" },
+          ]},
+        ];
+
+    </script>
+    <script src="./js/base.js"></script>
+      <script src="search/main.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+<nav class="navbar wm-page-top-frame">
+  <div class="container-fluid wm-top-container">
+    
+    <div class="wm-top-tool pull-right wm-vcenter">
+      <form class="dropdown wm-vcentered" id="wm-search-form" action="./search.html">
+        
+        <button id="wm-search-show" class="btn btn-sm btn-default" type="submit"
+          ><i class="fa fa-search" aria-hidden="true"></i></button>
+
+        <div class="input-group input-group-sm wm-top-search">
+          <input type="text" name="q" class="form-control" id="mkdocs-search-query" placeholder="Search" autocomplete="off">
+          <span class="input-group-btn" role="search">
+            
+            <button class="btn btn-default dropdown-toggle collapse" data-toggle="dropdown" type="button"><span class="caret"></span></button>
+            <ul id="mkdocs-search-results" class="dropdown-menu dropdown-menu-right"></ul>
+            <button id="wm-search-go" class="btn btn-default" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+          </span>
+        </div>
+      </form>
+    </div>
+
+    
+    <div class="wm-top-tool wm-vcenter pull-right wm-small-left">
+      <button id="wm-toc-button" type="button" class="btn btn-sm btn-default wm-vcentered"><i class="fa fa-th-list" aria-hidden="true"></i></button>
+    </div>
+
+    
+    
+
+    
+    <a href="" class="wm-top-brand wm-top-link wm-vcenter">
+      
+      <div class="wm-top-title">
+        MHjson<br>
+        
+      </div>
+    </a>
+  </div>
+</nav>
+
+  <div id="main-content" class="wm-page-top-frame">
+    
+<nav class="wm-toc-pane">
+  
+  <ul class="wm-toctree">
+        <li class="wm-toc-li wm-toc-lev1 "><a href="" class="wm-article-link wm-toc-text">mhjson</a>
+</li>
+  </ul>
+</nav>
+
+    <div class="wm-content-pane">
+      <iframe class="wm-article" name="article"></iframe>
+    </div>
+  </div>
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    
+
+    <h1 id="mhjson">mhjson</h1>
+<p><strong>mhjson</strong> is a simple, elegant Python package to Query over any type of JSON Data. It'll make your life easier by giving the flavour of an ORM-like query on your JSON.</p>
+<h2 id="installation">Installation</h2>
+<pre><code>pip install https://github.com/Codwizer/mhjson/archive/main.zip --force-reinstall
+</code></pre>
+<h2 id="usage">Usage</h2>
+<p>Just import the package before start using it.</p>
+<p>As a Python Package:</p>
+<pre><code class="language-python">from mhjson import MHjson
+</code></pre>
+<p>You can start using this package right away by importing your Json data from a file:</p>
+<pre><code class="language-python">MHjson('data.json')
+</code></pre>
+<p>or</p>
+<pre><code class="language-python">MHjson(data={&quot;id&quot;: 1, &quot;name&quot;: &quot;shaonty&quot;}) # must assign data if you want to pass data instead of file_path
+</code></pre>
+<p>You can start Query your data using the various query methods such as <strong>where</strong>, <strong>or_where</strong>, <strong>where_in</strong>, <strong>where_not_in</strong>, <strong>where_starts_with</strong>, <strong>where_ends_with</strong>, <strong>where_contains</strong> and so on. Also you can aggregate your data after query using <strong>sum</strong>, <strong>count</strong>, <strong>group_by</strong>, <strong>sort_by</strong>, <strong>max</strong>, <strong>min</strong> etc.</p>
+<p>Let's see a quick example:</p>
+<pre><code class="language-python"># sample Json data
+json_object = {
+    products: [
+        {
+            id: 1,
+            city: 'bsl',
+            name: 'iPhone',
+            cat: 1,
+            price: 80000.5
+        },
+        {
+            id: 2,
+            city: null,
+            name: 'macbook pro',
+            cat: 1,
+            price: 150000
+        },
+        {
+            id: 3,
+            city: 'dhk',
+            name: 'Redmi 3S Prime',
+            cat: 2,
+            price: 12000
+        },
+        {
+            id: 4,
+            city: 'bsl',
+            name: 'macbook air',
+            cat: 2,
+            price: 110000
+        }
+    ]
+};
+
+qe = MHjson(file_path)
+res = qe.at('products').where('cat', '=', 2).get()
+print(res)
+
+&quot;&quot;&quot;This will print
+
+[
+    {
+        id: 3,
+        city: 'dhk',
+        name: 'Redmi 3S Prime',
+        cat: 2,
+        price: 12000
+    },
+    {
+        id: 4,
+        city: 'bsl',
+        name: 'macbook air',
+        cat: 2,
+        price: 110000
+    }
+]
+&quot;&quot;&quot;
+</code></pre>
+<p>Let's say we want to get the Summation of <em>price</em> of the Queried result. We can do it easily by calling the <strong>sum()</strong> method instead of <strong>get()</strong>:</p>
+<pre><code class="language-python">res = qe.at('products').where('cat', '=', 2).sum('price')
+print(res)
+
+&quot;&quot;&quot;It will print:
+
+122000
+
+&quot;&quot;&quot;
+</code></pre>
+<p>Let's explore the full API to see what else magic this library can do for you.
+Shall we?</p>
+<h2 id="api">API</h2>
+<p>Following API examples are shown based on the sample JSON data given <a href="examples/data.json">here</a>. To get a better idea of the examples see that JSON data first. Also detailed examples of each API can be found <a href="examples/">here</a>.</p>
+<p><strong>List of API:</strong></p>
+<ul>
+<li><a href="#get">get</a></li>
+<li><a href="#from_filefile_path">from_path</a></li>
+<li><a href="#atpath">at</a></li>
+<li><a href="#wherekey-operator-value">where</a></li>
+<li><a href="#orwherekey-operator-value">or_where</a></li>
+<li><a href="#where_inkey-value">where_in</a></li>
+<li><a href="#where_not_inkey-value">where_not_in</a></li>
+<li><a href="#where_nullkey">where_null</a></li>
+<li><a href="#where_not_nullkey">where_not_null</a></li>
+<li><a href="#where_starts_withkey-value">where_starts_with</a></li>
+<li><a href="#where_ends_withkey-value">where_ends_with</a></li>
+<li><a href="#where_containskey-value">where_contains</a></li>
+<li><a href="#sumproperty">sum</a></li>
+<li><a href="#count">count</a></li>
+<li><a href="#size">size</a></li>
+<li><a href="#maxproperty">max</a></li>
+<li><a href="#minproperty">min</a></li>
+<li><a href="#avgproperty">avg</a></li>
+<li><a href="#first">first</a></li>
+<li><a href="#last">last</a></li>
+<li><a href="#nthindex">nth</a></li>
+<li><a href="#group_byproperty">group_by</a></li>
+<li><a href="#sortorder">sort</a></li>
+<li><a href="#sortbyproperty-order">sortBy</a></li>
+<li><a href="#resetdata">reset</a></li>
+<li><a href="#clone">clone</a></li>
+<li><a href="#chunksize">chunk</a></li>
+</ul>
+<h3 id="get"><code>get()</code></h3>
+<p>This method will execute queries and will return the resulted data. You need to call it finally after using some query methods. Details can be found in other API examples.</p>
+<h3 id="from_filefile_path"><code>from_file(file_path)</code></h3>
+<p>This method is the alternative of set json file path. Details can be found in other API examples.</p>
+<p><strong>example:</strong></p>
+<p>Let's say you have a file named <code>data.json</code>. You can set path like this:</p>
+<pre><code class="language-python">qu = MHjson().from_file('data.json').at('users').where('id', '=', 1).get()
+</code></pre>
+<h3 id="atpath"><code>at(path)</code></h3>
+<ul>
+<li><code>path</code> -- the path hierarchy of the data you want to start query from.</li>
+</ul>
+<p>By default, query would be started from the root of the JSON Data you've given. If you want to first move to a nested path hierarchy of the data from where you want to start your query, you would use this method. Skipping the <code>path</code> parameter or giving <strong>'.'</strong> as parameter will also start query from the root Data.</p>
+<p><strong>example:</strong></p>
+<p>Let's say you want to start query over the values of <em>'users'</em> property of your Json Data. You can do it like this:</p>
+<pre><code class="language-python">qu = MHjson(file_path).at('users').where('id', '=', 1).get()
+</code></pre>
+<p>If you want to traverse to more deep in hierarchy, you can do it like:</p>
+<pre><code class="language-python">qe = MHjson(file_path).at('users.5.visits').where('year', '=', 2011).get()
+</code></pre>
+<h3 id="wherekey-operator-value-case_insensitive"><code>where(key, operator, value, case_insensitive)</code></h3>
+<ul>
+<li><code>key</code> -- the property name of the data. Or you can pass a Function here to group multiple query inside it. See details in <a href="examples/where.py">example</a></li>
+<li><code>value</code> -- value to be matched with. It can be a <em>int</em>, <em>string</em>, <em>bool</em> or even <em>float</em> - depending on the <code>operator</code>.</li>
+<li>
+<p><code>operator</code> -- operand to be used for matching. The following operands are available to use:</p>
+<ul>
+<li><code>=</code> : For equality matching</li>
+<li><code>eq</code> : Same as <code>=</code></li>
+<li><code>!=</code> : For weak not equality matching</li>
+<li><code>neq</code> : Same as <code>!=</code></li>
+<li><code>&gt;</code> : Check if value of given <strong>key</strong> in data is Greater than <strong>value</strong></li>
+<li><code>gt</code> : Same as <code>&gt;</code></li>
+<li><code>&lt;</code> : Check if value of given <strong>key</strong> in data is Less than <strong>value</strong></li>
+<li><code>lt</code> : Same as <code>&lt;</code></li>
+<li><code>&gt;=</code> : Check if value of given <strong>key</strong> in data is Greater than or Equal of <strong>value</strong></li>
+<li><code>gte</code> : Same as <code>&gt;=</code></li>
+<li><code>&lt;=</code> : Check if value of given <strong>key</strong> in data is Less than or Equal of <strong>value</strong></li>
+<li><code>lte</code> : Same as <code>&lt;=</code></li>
+<li><code>null</code> : Check if the value of given <strong>key</strong> in data is <strong>null</strong> (<code>value</code> parameter in <code>where()</code> can be omitted for this <code>operator</code>)</li>
+<li><code>notnull</code> : Check if the value of given <strong>key</strong> in data is <strong>not null</strong> (<code>value</code> parameter in <code>where()</code> can be omitted for this <code>operator</code>)</li>
+<li><code>in</code> : Check if the value of given <strong>key</strong> in data is exists in given <strong>value</strong>. <strong>value</strong> should be a plain <em>List</em>. <strong>key</strong> can be a plain <em>List</em>.</li>
+<li><code>notin</code> : Check if the value of given <strong>key</strong> in data is not exists in given <strong>val</strong>. <strong>val</strong> should be a plain <em>List</em>.</li>
+<li><code>startswith</code> : Check if the value of given <strong>key</strong> in data starts with (has a prefix of) the given <strong>value</strong>. This would only works for <em>String</em> type data.</li>
+<li><code>endswith</code> : Check if the value of given <strong>key</strong> in data ends with (has a suffix of) the given <strong>value</strong>. This would only works for <em>String</em> type data.</li>
+<li><code>contains</code> : Same as <code>in</code></li>
+</ul>
+</li>
+<li>
+<p><code>case_insensitive</code> -- if <code>True</code>, the search will be case insensitive, <code>False</code> is default.</p>
+</li>
+</ul>
+<p><strong>example:</strong></p>
+<p>Let's say you want to find the <em>'users'</em> who has <em>id</em> of <code>1</code>. You can do it like this:</p>
+<pre><code class="language-python">qu = MHjson(file_path).at('users').where('id', '=', 1).get()
+</code></pre>
+<p>You can add multiple <em>where</em> conditions. It'll give the result by AND-ing between these multiple where conditions.</p>
+<pre><code class="language-python">qe = MHjson(file_path).at('users').where('id', '=', 1).where('location', '=', 'Sylhet').get()
+</code></pre>
+<pre><code class="language-python">qi = MHjson(file_path).at('users').where('id', '=', 1).where('location', '=', 'sylhet', True).get()
+</code></pre>
+<h3 id="or_wherekey-operator-value"><code>or_where(key, operator, value)</code></h3>
+<p>Parameters of <code>or_where()</code> are the same as <code>where()</code>. The only difference between <code>where()</code> and <code>or_where()</code> is: condition given by the <code>or_where()</code> method will OR-ed the result with other conditions.</p>
+<p>For example, if you want to find the users with <em>id</em> of <code>1</code> or <code>2</code>, you can do it like this:</p>
+<pre><code class="language-python">re = MHjson(file_path).at('users').where('id', '=', 1).or_where('id', '=', 2).get()
+</code></pre>
+<h3 id="where_inkey-value"><code>where_in(key, value)</code></h3>
+<ul>
+<li><code>key</code> -- the property name of the data</li>
+<li><code>value</code> -- it should be an <strong>List</strong></li>
+</ul>
+<p>This method will behave like <code>where(key, 'in', value)</code> method call.</p>
+<h3 id="where_not_inkey-value"><code>where_not_in(key, value)</code></h3>
+<ul>
+<li><code>key</code> -- the property name of the data</li>
+<li><code>value</code> -- it should be an <strong>List</strong></li>
+</ul>
+<p>This method will behave like <code>where(key, 'notin', value)</code> method call.</p>
+<h3 id="where_nullkey"><code>where_null(key)</code></h3>
+<ul>
+<li><code>key</code> -- the property name of the data</li>
+</ul>
+<p>This method will behave like <code>where(key, '=', 'None')</code> method call.</p>
+<h3 id="where_not_nullkey"><code>where_not_null(key)</code></h3>
+<ul>
+<li><code>key</code> -- the property name of the data</li>
+</ul>
+<p>This method will behave like <code>where(key, '!=', 'None')</code> method call.</p>
+<h3 id="where_starts_withkey-value"><code>where_starts_with(key, value)</code></h3>
+<ul>
+<li><code>key</code> -- the property name of the data</li>
+<li><code>value</code> -- it should be a String</li>
+</ul>
+<p>This method will behave like <code>where(key, 'startswith', value)</code> method call.</p>
+<h3 id="where_ends_withkey-value"><code>where_ends_with(key, value)</code></h3>
+<ul>
+<li><code>key</code> -- the property name of the data</li>
+<li><code>value</code> -- it should be a String</li>
+</ul>
+<p>This method will behave like <code>where(key, 'endswith', value)</code> method call.</p>
+<h3 id="where_containskey-val"><code>where_contains(key, val)</code></h3>
+<ul>
+<li><code>key</code> -- the property name of the data</li>
+<li><code>value</code> -- it should be a String or List</li>
+</ul>
+<p>This method will behave like <code>where(key, 'contains', val)</code> method call.</p>
+<h3 id="sumproperty"><code>sum(property)</code></h3>
+<ul>
+<li><code>property</code> -- the property name of the data</li>
+</ul>
+<p><strong>example:</strong></p>
+<p>Let's say you want to find the sum of the <em>'price'</em> of the <em>'products'</em>. You can do it like this:</p>
+<pre><code class="language-python">qe = MHjson(file_path).at('products').sum('price')
+</code></pre>
+<p>If the data you are aggregating is plain list, you don't need to pass the 'property' parameter.
+See detail example <a href="examples/sum.py">here</a></p>
+<h3 id="count"><code>count()</code></h3>
+<p>It will return the number of elements in the collection.</p>
+<p><strong>example:</strong></p>
+<p>Let's say you want to find how many elements are in the <em>'products'</em> property. You can do it like:</p>
+<pre><code class="language-python">qe = MHjson(file_path).at('products').count()
+</code></pre>
+<p>See detail example <a href="examples/count.py">here</a>.</p>
+<h3 id="size"><code>size()</code></h3>
+<p>This is an alias method of <code>count()</code>.</p>
+<h3 id="maxproperty"><code>max(property)</code></h3>
+<ul>
+<li><code>property</code> -- the property name of the data</li>
+</ul>
+<p><strong>example:</strong></p>
+<p>Let's say you want to find the maximum of the <em>'price'</em> of the <em>'products'</em>. You can do it like this:</p>
+<pre><code class="language-python">qu = MHjson(file_path).at('products').max('price')
+</code></pre>
+<p>If the data you are querying is plain array, you don't need to pass the 'property' parameter.</p>
+<h3 id="minproperty"><code>min(property)</code></h3>
+<ul>
+<li><code>property</code> -- the property name of the data</li>
+</ul>
+<p><strong>example:</strong></p>
+<p>Let's say you want to find the minimum of the <em>'price'</em> of the <em>'products'</em>. You can do it like this:</p>
+<pre><code class="language-python">qe = MHjson(file_path).at('products').min('price')
+</code></pre>
+<p>If the data you are querying is plain array, you don't need to pass the 'property' parameter.
+See detail example <a href="examples/min.py">here</a></p>
+<h3 id="avgproperty"><code>avg(property)</code></h3>
+<ul>
+<li><code>property</code> -- the property name of the data</li>
+</ul>
+<p><strong>example:</strong></p>
+<p>Let's say you want to find the average of the <em>'price'</em> of the <em>'products'</em>. You can do it like this:</p>
+<pre><code class="language-python">qe = MHjson(file_path).at('products').avg('price')
+</code></pre>
+<p>If the data you are querying is plain array, you don't need to pass the 'property' parameter.</p>
+<h3 id="first"><code>first()</code></h3>
+<p>It will return the first element of the collection.</p>
+<p><strong>example:</strong></p>
+<pre><code class="language-python">qe = MHjson(file_path).at('products').first()
+</code></pre>
+<p>See detail example <a href="examples/first.py">here</a>.</p>
+<h3 id="last"><code>last()</code></h3>
+<p>It will return the last element of the collection.</p>
+<p><strong>example:</strong></p>
+<pre><code class="language-python">qe = MHjson(file_path).at('products').last()
+</code></pre>
+<h3 id="nthindex"><code>nth(index)</code></h3>
+<ul>
+<li><code>index</code> -- index of the element to be returned.</li>
+</ul>
+<p>It will return the nth(n starts from 0) element of the collection. If the given index is a <strong>positive</strong> value, it will return the nth element from the beginning. If the given index is a <strong>negative</strong> value, it will return the nth element from the end.</p>
+<p><strong>example:</strong></p>
+<pre><code class="language-python">qe = MHjson(file_path).at('products').nth(2)
+</code></pre>
+<h3 id="group_byproperty"><code>group_by(property)</code></h3>
+<ul>
+<li><code>property</code> -- The property by which you want to group the collection.</li>
+</ul>
+<p><strong>example:</strong></p>
+<p>Let's say you want to group the <em>'users'</em> data based on the <em>'location'</em> property. You can do it like:</p>
+<pre><code class="language-python">qe = MHjson(file_path).at('users').group_by('location').get()
+</code></pre>
+<h3 id="sortorder"><code>sort(order)</code></h3>
+<ul>
+<li><code>order</code> -- If you skip the <em>'order'</em> property the data will be by default ordered as <strong>ascending</strong>. You need to pass <strong>'desc'</strong> as the <em>'order'</em> parameter to sort the data in <strong>descending</strong> order. Also, you can pass a compare function in <em>'order'</em> parameter to define your own logic to order the data.</li>
+</ul>
+<p><strong>Note:</strong> This method should be used for plain Array. If you want to sort an Array of Objects you should use the <strong>sortBy()</strong> method described later.</p>
+<p><strong>example:</strong></p>
+<p>Let's say you want to sort the <em>'arr'</em> data. You can do it like:</p>
+<pre><code class="language-python">qe = MHjson(file_path).at('arr').sort().get()
+</code></pre>
+<h3 id="sort_byproperty-order"><code>sort_by(property, order)</code></h3>
+<ul>
+<li><code>property</code> -- You need to pass the property name on which the sorting will be done.</li>
+<li><code>order</code> -- If you skip the <em>'order'</em> property the data will be by default ordered as <strong>ascending</strong>. You need to pass <strong>'desc'</strong> as the <em>'order'</em> parameter to sort the data in <strong>descending</strong> order. Also, you can pass a compare function in <em>'order'</em> parameter to define your own logic to order the data.</li>
+</ul>
+<p><strong>Note:</strong> This method should be used for Array of Objects. If you want to sort a plain Array you should use the <strong>sort()</strong> method described earlier.</p>
+<p><strong>example:</strong></p>
+<p>Let's say you want to sort the <em>'price'</em> data of <em>'products'</em>. You can do it like:</p>
+<pre><code class="language-python">qe = MHjson(file_path).at('products').sort_by('price').get()
+</code></pre>
+<h3 id="resetdata"><code>reset(data)</code></h3>
+<ul>
+<li><code>data</code> -- can be a JSON file path, or a JSON string or a JSON Object. If no data passed in the <code>data</code> parameter, the <code>JsonQ</code> Object instance will be reset to previously initialised data.</li>
+</ul>
+<p>At any point, you might want to reset the Object instance to a completely different set of data and then query over it. You can use this method in that case.</p>
+<p>See a detail example <a href="examples/reset.py">here</a>.</p>
+<h3 id="clone"><code>clone()</code></h3>
+<p>It will return a complete clone of the Object instance.</p>
+<h3 id="chunksize"><code>chunk(size)</code></h3>
+<p>It will return a complete new array after chunking your array with specific size.</p>
+
+  <br>
+    
+
+    <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="None">Windmill Dark</a> theme by None (noraj).</p>
+</footer>
+
+</body>
+</html>
+<!--
+MkDocs version : 1.5.3
+Build Date UTC : 2024-01-25 11:13:45.739150+00:00
+-->
