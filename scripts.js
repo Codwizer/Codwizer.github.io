@@ -20,7 +20,8 @@ window.onload = function() {
     "⭐",
     "💥",
     "🍭",
-    "🎈"
+    "🎈",
+    "🔍"
     ];
 
   var getCurrentTime = function() {
