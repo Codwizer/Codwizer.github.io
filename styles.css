@@ -1,6 +1,4 @@
-:root {
-	font-size: 1.125rem;
-}
+:root {	font-size: 1.125rem;}
 @media (min-width: 500px) {
 	:root {
 	font-size: 1.5rem;
